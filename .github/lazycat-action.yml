@@ -1,0 +1,28 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/howtolivebetter.lpk
+  target_arch: amd64
+
+# 静态站无镜像，版本来自本仓库 package.yml；build.sh 克隆上游最新提交并组装站点。
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: git
+
+build:
+  run_buildscript: true
+
+stores:
+  official:
+    # 仅发布喵喵（私有）商店
+    enabled: false
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: 高性价比人生指南
+    summary: "按性价比算账的人生指南：767 条循证建议，覆盖长寿防病、急救、省钱理财、法律红线、失业兜底与创业合规"
